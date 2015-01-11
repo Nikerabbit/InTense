@@ -1,0 +1,2 @@
+# InTense
+InTense MediaWiki extension
