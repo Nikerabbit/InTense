@@ -13,6 +13,7 @@ class SpecialRepoStatus extends SpecialPage {
 		$out = $this->getOutput();
 		$language = $this->getLanguage();
 		$this->setHeaders();
+		$out->addModules( 'ext.intense.special.repostatus' );
 
 		$manager = wfGetRepoManager();
 		$statusStorage = $manager->getStatusStorage();
@@ -23,7 +24,13 @@ class SpecialRepoStatus extends SpecialPage {
 			$status = $statusStorage->get( $id );
 			$config = $configStorage->get( $id );
 
-			$out->addHtml( '<tr><th>' . htmlspecialchars( $config['source'] ) . '</th></tr>' );
+			$header = Html::element(
+				'th',
+				array( 'class' => 'intense-repoheader', 'data-intense' => $config['id'] ),
+				$config['source']
+			);
+
+			$out->addHtml( "<tr>$header</tr>" );
 			unset( $config['source'] );
 
 			$out->addHtml(

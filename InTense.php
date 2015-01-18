@@ -17,13 +17,17 @@ $GLOBALS['wgMessagesDirs']['InTense'] = "$dir/i18n";
 $GLOBALS['wgExtensionMessagesFiles']['InTenseAlias'] = "$dir/InTense.alias.php";
 
 $GLOBALS['wgAutoloadClasses'] += array(
+	'ApiRepoManage' => "$dir/ApiRepoManage.php",
 	'InTenseMessageGroup' => "$dir/InTenseMessageGroup.php",
 	'ProcessMessageGroupJob' => "$dir/ProcessMessageGroupJob.php",
 	'SpecialRepoStatus' => "$dir/SpecialRepoStatus.php",
 );
 
+require "$dir/Resources.php";
+
 $GLOBALS['wgJobClasses']['ProcessMessageGroupJob'] = 'ProcessMessageGroupJob';
 $GLOBALS['wgSpecialPages']['RepoStatus'] = 'SpecialRepoStatus';
+$GLOBALS['wgAPIModules']['repomanage'] = 'ApiRepoManage';
 
 $GLOBALS['wgHooks']['TranslatePostInitGroups'][] = function ( &$list, &$deps, &$autoload ) {
 	$dbw = wfGetDB( DB_MASTER );
